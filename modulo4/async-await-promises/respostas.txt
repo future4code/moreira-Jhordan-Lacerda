@@ -1,0 +1,61 @@
+1°) a) Devo utilizar o endpoint getSubscribers
+b) const subscribers = async (): Promise<any>
+c)async function getSubscribers(): Promise<any> {
+  const response = await axios.get(`${baseURL}/subscribers`);
+  console.log(response.data);
+}
+
+2°) a) Para mim, eu não vejo nenhuma diferença, apenas o modo de escreve-las.
+b)const getSubscribers = async (): Promise<any> => {
+    const response = await axios.get(`${baseURL}/subscribers`)
+    console.log(response.data)
+}
+
+3°) a) Não, não teremos nenhum erro de tipagem.
+b) Fazemos isso porque fica mais explicito o que estamos retornando.
+c) const getSubscribers = async (): Promise<user[]> => {
+  const response = await axios.get(`${baseURL}/subscribers`);
+  return response.data;
+};
+
+4°) a) Promise<void>
+b)const createNews = async (news: any): Promise<void> => {
+  return axios.put(`${baseURL}/news`, news);
+};
+
+5°) a) const sendNotifications = async (
+  users: user[],
+  message: string
+): Promise<void> => {
+  try {
+    for (const user of users) {
+      await axios.post(`${baseURL}/notifications`, {
+        subscriberId: user.id,
+        message: "Sua notificação preferida",
+      });
+    }
+  } catch (err: any) {
+    console.log("Erro ao enviar mensagens!");
+  }
+};
+
+6°) a) Ele serve para receber um array de promises e retornar apenas uma promise.
+b) A vantagem é que faz com que o código fique mais perfomático.
+c)const sendNotifications = async (
+    users: user[],
+    message: string
+  ): Promise<void> => {
+      try {
+        const promises = users.map((user) =>{
+          return axios.post(`${baseURL}/notifications`, {
+            subscriberId: user.id,
+            message: message,
+          })
+        })
+      
+        await Promise.all(promises);
+  
+      } catch {
+          console.log("Error");
+      }
+  };
