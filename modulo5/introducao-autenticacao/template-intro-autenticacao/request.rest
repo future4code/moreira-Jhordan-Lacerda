@@ -1,0 +1,23 @@
+GET http://localhost:3003/user/profile
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6eyJpZCI6IjIxMTQzODM2LTQzZjItNGM1Zi04MDBiLTQzN2RiMGNhZmNmYyJ9LCJpYXQiOjE2NTE0MjA5MzgsImV4cCI6MTY1MTQzODkzOH0."
+Content-Type: application/json
+ 
+###
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "email": "Jhordan@eu.com",
+    "password": "123456"
+}
+
+###
+
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email": "Jhordan@eu.com",
+    "password": "123456"
+}
